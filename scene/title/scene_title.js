@@ -1,4 +1,4 @@
-class SceneTitle extends GuaScene {
+class SceneTitle extends GuaImage {
     constructor(game) {
         super(game)
         game.registerAction('k', function(){

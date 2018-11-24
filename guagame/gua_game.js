@@ -26,7 +26,7 @@ class GuaGame {
         return this.i
     }
     drawImage(img) {
-        this.context.drawImage(img.image, img.x, img.y)
+        this.context.drawImage(img.texture, img.x, img.y)
     }
     // update
     update() {
@@ -63,17 +63,15 @@ class GuaGame {
             g.runloop()
         }, 1000/window.fps)
     }
-    imageByName(name) {
+    textureByName(name) {
         var g = this
-        log('image by name', g.images)
         var img = g.images[name]
-        log('img', img, 'name', name)
-        var image = {
-            w: img.width,
-            h: img.height,
-            image: img,
-        }
-        return image
+        // var image = {
+        //     w: img.width,
+        //     h: img.height,
+        //     image: img,
+        // }
+        return img
     }
     runWithScene(scene) {
         var g = this
@@ -105,9 +103,7 @@ class GuaGame {
                 g.images[name] = img
                 // 所有图片都成功载入之后, 调用 run
                 loads.push(1)
-                log('load images', loads.length, names.length)
                 if (loads.length == names.length) {
-                    log('load images', g.images)
                     g.__start()
                 }
             }
