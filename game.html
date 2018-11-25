@@ -14,6 +14,7 @@
         <script src='guagame/gua_game.js'></script>
         <script src='guagame/gua_scene.js'></script>
         <script src='guagame/gua_image.js'></script>
+        <script src='guagame/gua_particle_system.js'></script>
         <!-- 场景文件 -->
         <script src='scene/main/paddle.js'></script>
         <script src='scene/main/ball.js'></script>
@@ -32,6 +33,103 @@
         <div class="">
             <!-- <textarea id="id-text-log" rows="20" cols="50"></textarea> -->
         </div>
+        <!--<div class="">-->
+            <!--<label>-->
+                <!--<input class="gua-auto-slider" type="range"-->
+                       <!--value=""-->
+
+                       <!--data-value="config.player_speed"-->
+                <!--&gt;-->
+                <!--玩家速度:<span class="gua-label"></span>-->
+            <!--</label>-->
+
+        <!--</div>-->
+        <!--<div class="">-->
+            <!--<label>-->
+                <!--<input class="gua-auto-slider" type="range"-->
+                       <!--value=""-->
+                       <!--max='10'-->
+                       <!--data-value="config.fire_cooldown"-->
+                <!--&gt;-->
+                <!--子弹冷却时间:<span class="gua-label"></span>-->
+            <!--</label>-->
+
+        <!--</div>-->
+        <!--<div class="">-->
+            <!--<label>-->
+                <!--<input class="gua-auto-slider" type="range"-->
+                       <!--value=""-->
+                       <!--max='10'-->
+                       <!--min="-10"-->
+                       <!--data-value="config.cloud_speed"-->
+                <!--&gt;-->
+                <!--cloud speed:<span class="gua-label"></span>-->
+            <!--</label>-->
+
+        <!--</div>-->
+        <!--<div class="">-->
+            <!--<label>-->
+                <!--<input class="gua-auto-slider" type="range"-->
+                       <!--value=""-->
+                       <!--data-value="config.bullet_speed"-->
+                <!--&gt;-->
+                <!--bullet 速度:<span class="gua-label"></span>-->
+            <!--</label>-->
+
+        <!--</div>-->
+        <div class="allConfigs"></div>
         <script src=main.js></script>
+        <script>
+            var createConfig = function (config) {
+                var modal = `<div class="">
+                    <label>
+                        <input class="gua-auto-slider" type="range"
+                               value=""
+                               ${config.special}
+                               data-value="config.${config.key}"
+                        >
+                        ${config.name}<span class="gua-label"></span>
+                    </label>
+                </div>`
+                return modal
+            }
+            var addConfigIntoPage = function () {
+                var configs = [
+                    { key: 'player_speed', name: '玩家速度:', special: ''},
+                    { key: 'cloud_speed', name: '云朵速度:', special: 'max=\'10\' min="-10"'},
+                    { key: 'enemy_speed', name: '敌机速度:', special:'max=\'10\''},
+                    { key: 'bullet_speed', name: '子弹速度:', special:''},
+                    { key: 'fire_cooldown', name: '发射冷却:', special: 'max=\'10\''},
+                ]
+                var conEle = document.querySelector('.allConfigs')
+                for (var i = 0; i < configs.length; i++) {
+                    var con = configs[i]
+                    var each = createConfig(con)
+                    conEle.insertAdjacentHTML('beforeend', each)
+                }
+
+            }
+            addConfigIntoPage()
+
+            var es = sel => document.querySelectorAll(sel)
+
+            var bindAll = function (sel, eventName, callback) {
+                var l = es(sel)
+                for (var i = 0; i < l.length; i++) {
+                    var input = l[i]
+                    input.addEventListener(eventName, function (event) {
+                        callback(event)
+                    })
+                }
+            }
+            bindAll('.gua-auto-slider', 'input', function (event) {
+                var target = event.target
+                var bindVar = target.dataset.value
+                var v = target.value
+                eval(bindVar + '=' + v)
+                var label = target.closest('label').querySelector('.gua-label')
+                label.innerText = v
+            })
+        </script>
     </body>
 </html>
