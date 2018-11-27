@@ -139,7 +139,6 @@ class Scene extends GuaScene {
     }
     addEnemies () {
         var es = []
-        log('this.numberOfEnemis', this.numberOfEnemis)
         for (let i = 0; i < this.numberOfEnemis; i++) {
             var e = Enemy.new(this.game)
             es.push(e)
