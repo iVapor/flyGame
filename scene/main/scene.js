@@ -68,7 +68,6 @@ class Enemy extends GuaImage {
     constructor(game) {
         var type = randomBetween(0, 4)
         var name = 'enemy' + type
-        log('IN Enemy name', name)
         super(game, name)
         this.setup()
     }
