@@ -74,10 +74,10 @@ class GuaParticleSystem {
         this.particles = this.particles.filter(p => p.life > 0)
     }
     draw(){
-        if (this.duration < 0) {
-            //todo 这是一个临时的解决方案，应该从 scene 中删掉它自己
-            return
-        }
+        // if (this.duration < 0) {
+        //     //todo 这是一个临时的解决方案，应该从 scene 中删掉它自己
+        //     return
+        // }
         for(var p of this.particles){
             p.draw()
         }

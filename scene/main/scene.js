@@ -137,8 +137,9 @@ class Scene extends GuaScene {
 
         this.addEnemies()
         //add particles
-        var ps = GuaParticleSystem.new(this.game)
-        this.addElement(ps)
+        this.ps = GuaParticleSystem.new(this.game)
+        this.psIndex = this.addElement(this.ps)
+
     }
     addEnemies () {
         var es = []
@@ -176,6 +177,7 @@ class Scene extends GuaScene {
     update() {
         super.update()
         this.cloud.y += 1
+        this.removeElement(this.ps, this.psIndex)
     }
 }
 
